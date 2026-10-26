@@ -2,13 +2,15 @@ package musicFactory;
 
 public enum Direction
 {
-    UP,
-    DOWN,
-    LEFT,
-    RIGHT,
+    up,
+    down,
+    left,
+    right,
 
-    UP_RIGHT,
-    UP_LEFT,
-    DOWN_RIGHT,
-    DOWN_LEFT
+    up_right,
+    up_left,
+    down_right,
+    down_left,
+
+    neutral
 }

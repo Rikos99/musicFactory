@@ -9,8 +9,8 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <maven.compiler.source>26</maven.compiler.source>
-        <maven.compiler.target>26</maven.compiler.target>
+        <maven.compiler.source>25</maven.compiler.source>
+        <maven.compiler.target>25</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
@@ -45,6 +45,21 @@
             <version>6.1.3</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>cz.vsb.fei</groupId>
+            <artifactId>kelvin-java-unittest-support</artifactId>
+            <version>[0.1.4,)</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
-
+    <repositories>
+        <repository>
+            <id>vsb-education-release</id>
+            <url>https://artifactory.cs.vsb.cz/repository/education-releases/</url>
+        </repository>
+        <repository>
+            <id>vsb-education-snapshot</id>
+            <url>https://artifactory.cs.vsb.cz/repository/education-snapshot/</url>
+        </repository>
+    </repositories>
 </project>

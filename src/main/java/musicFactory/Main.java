@@ -1,46 +1,54 @@
 package musicFactory;
 
-import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.scene.Group;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 import java.util.Objects;
 
-
 public class Main extends Application
 {
     public static void main(String[] args) { launch(args); }
 
-    private Canvas canvas;
-    private AnimationTimer timer;
+    private static MainMenuController mainMenuController;
+    private static GameController gameController;
+    private static Stage primaryStage;
 
     @Override
     public void start(Stage primaryStage) throws Exception
     {
         try
         {
-            Group root = new Group();
-            canvas = new Canvas(Settings.getInstance().getScreenWidth(), Settings.getInstance().getScreenHeight());
-            root.getChildren().add(canvas);
-            Scene scene = new Scene(root, Settings.getInstance().getScreenWidth(), Settings.getInstance().getScreenHeight());
-            scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("application.css")).toExternalForm());
-            primaryStage.setScene(scene);
+            FXMLLoader mainMenuLoader = new FXMLLoader(getClass().getResource("/musicFactory/mainMenu.fxml"));
+            Parent mainMenuRoot = mainMenuLoader.load();
+            Scene mainMenuScene = new Scene(mainMenuRoot, Settings.getScreenWidth(), Settings.getScreenHeight());
+            mainMenuScene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("application.css")).toExternalForm());
+            mainMenuController = mainMenuLoader.getController();
+
+            FXMLLoader gameLoader = new FXMLLoader(getClass().getResource("/musicFactory/game.fxml"));
+            Parent gameRoot = gameLoader.load();
+            Scene gameScene = new Scene(gameRoot, Settings.getScreenWidth(), Settings.getScreenHeight());
+            gameScene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("application.css")).toExternalForm());
+            gameController = gameLoader.getController();
+
+            primaryStage.setScene(mainMenuScene);
             primaryStage.resizableProperty().set(false);
             primaryStage.setTitle("Music Factory - The Game");
             primaryStage.show();
 
-            // TODO init key listener
-            InputHandler inputHandler = new InputHandler();
-            scene.addEventHandler(KeyEvent.KEY_PRESSED, inputHandler);
+            Main.primaryStage = primaryStage;
+
+            MainMenuController.setPrimaryStage(primaryStage);
+            MainMenuController.setMainMenuScene(mainMenuScene);
+            MainMenuController.setGameScene(gameScene);
+
+            gameScene.setOnKeyPressed(InputHandler::handlePress);
+            gameScene.setOnKeyReleased(InputHandler::handleRelease);
 
             primaryStage.setOnCloseRequest(this::exitProgram);
-            timer = new Renderer(canvas);
-            timer.start();
         }
         catch (Exception e)
         {
@@ -50,9 +58,20 @@ public class Main extends Application
 
     public void stop() throws Exception
     {
-        timer.stop();
+        gameController.stop();
         super.stop();
     }
 
-    private void exitProgram(WindowEvent evt) {System.exit(0);}
+    private void exitProgram(WindowEvent evt) { System.exit(0); }
+
+    public static void changeScene(Scene scene)
+    {
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    public static GameController getGameController()
+    {
+        return gameController;
+    }
 }

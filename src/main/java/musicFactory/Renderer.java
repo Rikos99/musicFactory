@@ -23,6 +23,7 @@ public class Renderer extends AnimationTimer
         lastFrame = now;
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
-        Player.getPlayer().draw(gc);
+        World.getWorld().draw(gc);
+        World.getWorld().simulate(delta);
     }
 }

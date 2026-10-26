@@ -1,54 +1,77 @@
 package musicFactory;
 
-import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
-// TODO implement better way that gets more inputs at once
-public class InputHandler implements EventHandler<KeyEvent>
+public class InputHandler
 {
-    public InputHandler()
-    {
+    private static boolean moveUp = false;
+    private static boolean moveDown = false;
+    private static boolean moveLeft = false;
+    private static boolean moveRight = false;
 
+
+    public static void handlePress(KeyEvent keyEvent)
+    {
+        if(keyEvent.getCode() == Settings.getMoveUpKey())
+        {
+            moveUp = true;
+        }
+        if(keyEvent.getCode() == Settings.getMoveDownKey())
+        {
+            moveDown = true;
+        }
+        if(keyEvent.getCode() == Settings.getMoveLeftKey())
+        {
+            moveLeft = true;
+        }
+        if(keyEvent.getCode() == Settings.getMoveRightKey())
+        {
+            moveRight = true;
+        }
+    }
+    public static void handleRelease(KeyEvent keyEvent)
+    {
+        if(keyEvent.getCode() == Settings.getMoveUpKey())
+        {
+            moveUp = false;
+        }
+        if(keyEvent.getCode() == Settings.getMoveDownKey())
+        {
+            moveDown = false;
+        }
+        if(keyEvent.getCode() == Settings.getMoveLeftKey())
+        {
+            moveLeft = false;
+        }
+        if(keyEvent.getCode() == Settings.getMoveRightKey())
+        {
+            moveRight = false;
+        }
     }
 
-    @Override
-    public void handle(KeyEvent keyEvent)
+    public static boolean isMoveUp()
     {
-        System.out.println(keyEvent.getText());
-        /*
-        switch(keyEvent.getCode())
-        {
-            case KeyCode.W ->
-            {
-                Player player = Player.getPlayer();
-                player.setDirection(Direction.UP);
-                player.move();
-                // System.out.println("w");
-            }
-            case KeyCode.S ->
-            {
-                Player player = Player.getPlayer();
-                player.setDirection(Direction.DOWN);
-                player.move();
-                // System.out.println("s");
-            }
-            case KeyCode.A ->
-            {
-                Player player = Player.getPlayer();
-                player.setDirection(Direction.LEFT);
-                player.move();
-                // System.out.println("a");
-            }
-            case KeyCode.D ->
-            {
-                Player player = Player.getPlayer();
-                player.setDirection(Direction.RIGHT);
-                player.move();
-                // System.out.println("d");
-            }
-        }
+        return moveUp;
+    }
 
-         */
+    public static boolean isMoveDown()
+    {
+        return moveDown;
+    }
+
+    public static boolean isMoveLeft()
+    {
+        return moveLeft;
+    }
+
+    public static boolean isMoveRight()
+    {
+        return moveRight;
+    }
+
+    public static boolean isMove()
+    {
+        return moveUp || moveDown || moveLeft || moveRight;
     }
 }

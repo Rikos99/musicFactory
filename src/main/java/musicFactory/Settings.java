@@ -1,52 +1,30 @@
 package musicFactory;
 
 
+import javafx.scene.input.KeyCode;
+
 public class Settings
 {
-    private static Settings instance;
+    public static final int DEBUG = 1;
 
-    private int screenWidth;
-    private int screenHeight;
+    private static int screenWidth = 1280;
+    private static int screenHeight = 720;
 
-    private int moveUp;
-    private int moveDown;
-    private int moveLeft;
-    private int moveRight;
+    private static KeyCode moveUpKey = KeyCode.W;
+    private static KeyCode moveDownKey = KeyCode.S;
+    private static KeyCode moveLeftKey  = KeyCode.A;
+    private static KeyCode moveRightKey  = KeyCode.D;
 
-    private Settings()
-    {
-        this.screenWidth = 800;
-        this.screenHeight = 600;
-
-
-        // TODO lepší řešení input mapy
-        /*
-        moveUp =    KeyEvent.VK_W;
-        moveDown =  KeyEvent.VK_S;
-        moveLeft =  KeyEvent.VK_A;
-        moveRight = KeyEvent.VK_D;
-        */
-    }
-
-    public static Settings getInstance()
-    {
-        if(instance == null)
-        {
-            instance = new Settings();
-        }
-
-        return instance;
-    }
-
-    public int getScreenWidth() { return screenWidth; }
-
-    public int getScreenHeight() { return screenHeight; }
-
-    public int getMoveUp() { return moveUp; }
-
-    public int getMoveDown() { return moveDown; }
-
-    public int getMoveLeft() { return moveLeft; }
-
-    public int getMoveRight() { return moveRight; }
+    public static int getScreenWidth() { return screenWidth; }
+    public static void setScreenWidth(int screenWidth) { Settings.screenWidth = screenWidth; }
+    public static int getScreenHeight() { return screenHeight; }
+    public static void setScreenHeight(int screenHeight) { Settings.screenHeight = screenHeight; }
+    public static KeyCode getMoveUpKey() { return moveUpKey; }
+    public static void setMoveUpKey(KeyCode moveUpKey) { Settings.moveUpKey = moveUpKey; }
+    public static KeyCode getMoveDownKey() { return moveDownKey; }
+    public static void setMoveDownKey(KeyCode moveDownKey) { Settings.moveDownKey = moveDownKey; }
+    public static KeyCode getMoveLeftKey() { return moveLeftKey; }
+    public static void setMoveLeftKey(KeyCode moveLeftKey) { Settings.moveLeftKey = moveLeftKey; }
+    public static KeyCode getMoveRightKey() { return moveRightKey; }
+    public static void setMoveRightKey(KeyCode moveRightKey) { Settings.moveRightKey = moveRightKey; }
 }
