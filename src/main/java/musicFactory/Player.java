@@ -4,7 +4,7 @@ import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import org.jetbrains.annotations.Nullable;
+// import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
@@ -77,7 +77,6 @@ public class Player extends Object implements Collidable
 
     private static final double diagonalScale = Math.sin(45);
 
-    @Nullable
     private Point2D getNewPos() {
         Point2D newPos = null;
 
